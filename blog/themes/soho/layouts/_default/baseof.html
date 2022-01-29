@@ -42,12 +42,6 @@
         integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
         crossorigin="anonymous" />
 
-  <link rel="apple-touch-icon-precomposed"
-        sizes="144x144"
-        href="/apple-touch-icon-144-precomposed.png">
-
-  <link rel="shortcut icon" href="/favicon.png">
-
   <!-- RSS -->
   {{ range .AlternativeOutputFormats -}}
     {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}

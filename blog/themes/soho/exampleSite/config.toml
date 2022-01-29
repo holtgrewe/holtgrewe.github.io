@@ -26,17 +26,12 @@ mainSections = ["post"]
   [[params.socialIcons]]
   icon = "fa-linkedin"
   title = "Linkedin"
-  url = "#"
+  url = "https://www.linkedin.com/in/manuel-holtgrewe/"
 
   [[params.socialIcons]]
   icon = "fa-github"
   title = "GitHub"
-  url = "https://github.com/alexandrevicenzi/soho"
-
-  [[params.socialIcons]]
-  icon = "fa-twitter"
-  title = "Twitter"
-  url = "#"
+  url = "https://github.com/holtgrewe"
 
 [menu]
 
