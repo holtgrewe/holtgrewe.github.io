@@ -2,7 +2,7 @@
 title: My First Post
 date: '2022-01-28'
 categories:
-- Meta
+  - Meta
 author: Manuel Holtgrewe
 ---
 
