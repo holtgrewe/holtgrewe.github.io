@@ -1,6 +1,6 @@
 +++
 description = ""
-tags = ["Development", "golang"]
-categories = ["Development", "GoLang"]
+tags = ["golang"]
+categories = ["GoLang"]
 draft = false
 +++

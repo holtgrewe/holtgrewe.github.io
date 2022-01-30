@@ -45,28 +45,28 @@ themeColor = "#878B94"
 [menu]
 
   [[menu.main]]
+  name = "About"
+  identifier = "about"
+  weight = 10
+  url = "/about/"
+
+  [[menu.main]]
   name = "Posts"
-  weight = 100
+  weight = 200
   identifier = "posts"
   url = "/posts/"
 
   [[menu.main]]
   name = "Categories"
-  weight = 200
+  weight = 300
   identifier = "categories"
   url = "/categories/"
 
   [[menu.main]]
   name = "Tags"
-  weight = 200
+  weight = 400
   identifier = "tags"
   url = "/tags/"
-
-  [[menu.main]]
-  name = "About"
-  identifier = "about"
-  weight = 10
-  url = "/about/"
 
 [taxonomies]
 category = "categories"

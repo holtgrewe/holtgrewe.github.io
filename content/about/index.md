@@ -1,7 +1,7 @@
 ---
 title: About
 description: The personal/professional website of Manuel Holtgrewe
-date: 2019-02-28
+date: 2022-02-28
 aliases:
   - about-me
   - about-manuel
@@ -19,7 +19,7 @@ I'm working with DNA in computers in a clinical setting with wonderful collabora
 
 **Bioinformatics Staff Scientist, Beule Lab, BIH**
 
-Since 2022, I am migrating to my role as a **staff scientist** at [Dieter Beule's lab at Berlin Institute](https://www.bihealth.org/de/aktuell/dieter-beule-erhaelt-professur-fuer-translationale-bioinformatik).
+Since 2022, I am migrating to my role as a **staff scientist** at [Dieter Beule's lab at Berlin Institute of Health](https://www.bihealth.org/de/aktuell/dieter-beule-erhaelt-professur-fuer-translationale-bioinformatik).
 Here, I'm continuing my research 
 
 **Core Unit Bioinformatics (CUBI), BIH**
@@ -32,7 +32,7 @@ Some highlights:
 - **Holtgrewe M**, Stolpe O, Nieminen M, ..., Beule D. "VarFish: comprehensive DNA variant analysis for diagnostics and research". NAR, 2020. [[paper]](https://academic.oup.com/nar/article/48/W1/W162/5825625)
 - Weiner J, Suwalski P, **Holtgrewe M**, ..., Heidecker B. "Increased risk of severe clinical course of COVID-19 in carriers of HLA-C*04:01". EClinicalMedicine, 2021. [[paper]](https://pubmed.ncbi.nlm.nih.gov/34490415/)
 - **Holtgrewe M**, Knaus A, Hildebrand G, ..., Krawitz PM. "Multisite de novo mutations in human offspring after paternal exposure to ionizing radiation". Scientific reports, 2018. [[paper]](https://www.nature.com/articles/s41598-018-33066-x)
-- Seidel F, **Holtgrewe M**, ..., Klassen S. "Pathogenic Variants Associated With Dilated Cardiomyopathy Predict Outcome in Pediatric Myocarditis". Circulation, 2021. [[paper]](https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.120.003250)
+- Seidel F, **Holtgrewe M**, ..., Klasasen S. "Pathogenic Variants Associated With Dilated Cardiomyopathy Predict Outcome in Pediatric Myocarditis". Circulation, 2021. [[paper]](https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.120.003250)
 - Melo US, Schöpflin R, Acuna-Hidalgo R, Mensah MA, Fischer-Zirnsak B, **Holtgrewe M**, ..., Mundlos S. "Hi-C identifies complex genomic rearrangements and TAD-shuffling in developmental diseases". AJHG, 2020. [[paper]](https://www.sciencedirect.com/science/article/pii/S0002929720301257)
 
 You can find the **full list** of my publications on [**Google Scholar**](https://scholar.google.de/citations?user=ej7e0LAAAAAJ&hl=en) and more information on the [**CUBI Website**](https://www.cubi.bihealth.org).
