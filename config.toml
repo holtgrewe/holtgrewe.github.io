@@ -12,7 +12,7 @@ ignoreErrors = ["error-remote-getjson"]
 disable_share = true
 
 [params]
-title = "Soho Theme"
+title = "Full Stack Bioinformatics"
 description = "From transistors to biomedical insight"
 # gravatar = "soho@example.com"
 images = ["images/profile.jpg"]
@@ -72,3 +72,17 @@ themeColor = "#878B94"
 category = "categories"
 tag = "tags"
 series = "series"
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = 'monokai'
+    tabWidth = 4
