@@ -1,10 +1,9 @@
-+++
-title = "About"
-description = "Hugo, the world's fastest framework for building websites"
-date = "2022-02-28"
-aliases = ["about-us", "about-hugo", "contact"]
-author = "Hugo Authors"
-+++
+---
+title: About
+description: Personal website of Manuel Holtgrewe
+date: 2022-01-28
+author: Manuel Holtgrewe
+---
 
 This is the web site of Manuel Holtgrewe, computer scientist, bioinformatician (focus on medical genetics), scientist, engineer, technologist, nerd -- not necessarily in this order.
 
