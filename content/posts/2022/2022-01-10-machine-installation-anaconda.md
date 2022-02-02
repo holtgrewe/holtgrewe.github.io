@@ -91,12 +91,21 @@ xCAT will then generate the appropriate `dhcpd` configuration and manually alloc
 
 ## The Ironic Way
 
-Ironc is an OpenStack project that allows you to manage bare metal hardware.
+Ironic is an OpenStack project that allows you to manage bare metal hardware.
 One main advantage is that once everything is setup properly, you can schedule bare metal servers using the same way that OpenStack uses for running virtual machines (the component for managing compute in OpenStack is called *nova*).
 This is available to you in the Ansible collection [openstack.cloud](https://docs.openstack.org/openstack-ansible/latest/) and you only specify a different "machine flavor" to get a bare metal machine instead of a virtual one.
 This makes it very easy to have a test/staging environment, make everything work there and then roll it out on bare metal.
 Further plus points is the comprehensive documentation (in particular when compared to xCAT), the ironic community is much larger than xCAT (which appears to be mainly a developer at IBM), and the ironic people are extremely nice and friendly on IRC.
 What's not to love?
+
+Deployment with ironic works differently.
+Note that ironic consists of several components and I will not go into details here.
+Shortly, ironic performs deployment buy **copying disk images to your hard drive instead of running an installer**.
+How to obtain these disk images will be topic of another post.
+
+How does ironic achieve this?
+On installation, ironic makes the server PXE boot into an an image running python-ironic-agent.
+This agent then calls back into an API provided by openstack and loads a disk image, e.g., your favourite Ubuntu or Rocky Linux image
 
 - ironic python agent
 - copy image
