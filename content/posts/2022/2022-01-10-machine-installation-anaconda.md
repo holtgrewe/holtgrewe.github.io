@@ -6,7 +6,6 @@ categories:
 tags:
   - hpc
 author: Manuel Holtgrewe
-draft: true
 ---
 
 This post describes the two basic options for system installation that we have tried so far.
@@ -32,7 +31,7 @@ But clearly this does not scale up to two hundred servers.
 Also, each server needs to be setup with its own IP address and host name.
 For this, the [preboot execution environment](https://en.wikipedia.org/wiki/Preboot_Execution_Environment) (PXE, pronounced as "pixie") has been developed in the 1990s.
 
-{{< figure src="/posts/2022/2022-01-10-pxe-boot-wikipedia.png" width="50%" caption="PXE boot according to Wikipedia [source](https://en.wikipedia.org/wiki/File:PXE_diagram.png)" >}}
+{{< figure src="/posts/2022/2022-01-10-pxe-boot-wikipedia.png" width="50%" caption="PXE boot according to Wikipedia. [[Source]](https://en.wikipedia.org/wiki/File:PXE_diagram.png)" >}}
 
 So what exactly is PXE?
 PXE is an open and vendor-independent standard for a client-server environment for a client-server boot environment.
@@ -98,6 +97,8 @@ This makes it very easy to have a test/staging environment, make everything work
 Further plus points is the comprehensive documentation (in particular when compared to xCAT), the ironic community is much larger than xCAT (which appears to be mainly a developer at IBM), and the ironic people are extremely nice and friendly on IRC.
 What's not to love?
 
+{{< figure src="/posts/2022/2022-01-10-ironic-logo.png" width="30%" caption="The ironic &quot;Bear Metal&quot; mascot. [[Source]](https://wiki.openstack.org/wiki/Ironic)" >}}
+
 Deployment with ironic works differently.
 Note that ironic consists of several components and I will not go into details here.
 Shortly, ironic performs deployment buy **copying disk images to your hard drive instead of running an installer**.
@@ -105,7 +106,20 @@ How to obtain these disk images will be topic of another post.
 
 How does ironic achieve this?
 On installation, ironic makes the server PXE boot into an an image running python-ironic-agent.
-This agent then calls back into an API provided by openstack and loads a disk image, e.g., your favourite Ubuntu or Rocky Linux image
+This agent then calls back into an API provided by openstack and loads a disk image, e.g., your favourite Ubuntu or Rocky Linux image, and will write it to your disk.
+When using so-called "cloud-ready" images, these images will run [cloud-init](https://cloudinit.readthedocs.io/en/latest/) on startup with will configure the bare metal machine's network settings (and others) to use the correct IP.
+This means that **installations are much faster** than when falling back to anaconda and you can even get a head's start by, e.g., creating an image with the latest and greatest operating system, software, and patches, and deploy them to all of your dozens, or hundreds, of servers.
+Pretty neat, eh?
 
-- ironic python agent
-- copy image
+## Wrap-Up
+
+To summarize:
+
+- PXE is an open standard built upon the DHCP and TFTP protocols that enables automated network installation of your hosts (iPXE is the more modern incarnation that also supports UEFI boots).
+- xCAT is a useful middleware for installing your cluster with PXE (of course, it goes beyond this).
+- OpenStack Ironic is a sophisticated component to perform full life cycle of your hardware (that also works standalone, by the way).
+
+## Further Reading
+
+- ["OpenStack Ironic Bare Metal Program case study: CERN"](https://superuser.openstack.org/articles/ironic-bare-metal-case-study-cern/), [Superuser Magazine](https://superuser.openstack.org), April 29, 2019.
+- ["OpenStack Ironic Bare Metal Program case study: StackHPC"](https://superuser.openstack.org/articles/openstack-ironic-bare-metal-program-case-study-stackhpc/), [Superuser Magazine](https://superuser.openstack.org), July 23, 2019.
