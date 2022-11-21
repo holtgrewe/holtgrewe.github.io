@@ -7,6 +7,8 @@ tags:
   - bash
   - sleight of hand
 author: Manuel Holtgrewe
+images:
+  - /posts/2022/2022-11-21-shell-etching.jpg
 ---
 
 This post deals with the basics "and beyond" of job control in Bash.
