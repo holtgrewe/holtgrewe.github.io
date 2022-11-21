@@ -1,198 +1,28 @@
-<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title>HPC for Bioinformatics (1/?): Introduction &#183; Full Stack Bioinformatics</title>
-<meta name=description content>
-<meta itemprop=name content="HPC for Bioinformatics (1/?): Introduction">
-<meta itemprop=description content="This is the first entry in the HPC for Bioinformatics series."><meta itemprop=datePublished content="2022-01-03T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-01-03T00:00:00+00:00">
-<meta itemprop=wordCount content="1035"><meta itemprop=image content="https://fullstackbio.de/images/profile.jpg">
-<meta itemprop=keywords content="hpc,">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://fullstackbio.de/images/profile.jpg">
-<meta name=twitter:title content="HPC for Bioinformatics (1/?): Introduction">
-<meta name=twitter:description content="This is the first entry in the HPC for Bioinformatics series.">
-<meta property="og:title" content="HPC for Bioinformatics (1/?): Introduction">
-<meta property="og:description" content="This is the first entry in the HPC for Bioinformatics series.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/"><meta property="og:image" content="https://fullstackbio.de/images/profile.jpg"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-03T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-01-03T00:00:00+00:00"><meta property="og:site_name" content="Full Stack Bioinformatics">
-<script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://fullstackbio.de/#author","name":null,"image":{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg"},"description":"From transistors to biomedical insight"},{"@type":"WebSite","@id":"https://fullstackbio.de/#website","url":"https://fullstackbio.de/","name":"Full Stack Bioinformatics","description":"From transistors to biomedical insight","publisher":{"@id":"https://fullstackbio.de/#author"},"inLanguage":"en"},{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg","caption":"Full Stack Bioinformatics"},{"@type":"WebPage","@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage","url":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/","name":"HPC for Bioinformatics (1/?): Introduction","isPartOf":{"@id":"https://fullstackbio.de/#website"},"about":{"@id":"https://fullstackbio.de/#author"},"datePublished":"2022-01-03T00:00:00+00:00","dateModified":"2022-01-03T00:00:00+00:00","description":"This is the first entry in the HPC for Bioinformatics series.","inLanguage":"en","potentialAction":[{"@type":"ReadAction","target":["https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/"]}]},{"@type":"Article","isPartOf":{"@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage"},"mainEntityOfPage":{"@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage"},"headline":"HPC for Bioinformatics (1/?): Introduction","datePublished":"2022-01-03T00:00:00+00:00","dateModified":"2022-01-03T00:00:00+00:00","publisher":{"@id":"https://fullstackbio.de/#author"},"keywords":["hpc"],"articleSection":[],"inLanguage":"en","author":{"@type":"Person","name":"Manuel Holtgrewe"},"potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#comments"]}]}]}</script>
-<link type=text/css rel=stylesheet href=/css/print.css media=print>
-<link type=text/css rel=stylesheet href=/css/poole.css>
-<link type=text/css rel=stylesheet href=/css/hyde.css>
-<style type=text/css>.sidebar{background-color:#878b94}.read-more-link a{border-color:#878b94}.read-more-link a:hover{background-color:#878b94}.pagination li a{color:#878b94;border:1px solid #878b94}.pagination li.active a{background-color:#878b94}.pagination li a:hover{background-color:#878b94;opacity:.75}footer a,.content a,.related-posts li a:hover{color:#878b94}</style>
-<link type=text/css rel=stylesheet href=/css/custom.css>
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous>
-</head>
-<body>
-<aside class=sidebar>
-<div class=container>
-<div class=sidebar-about>
-<div class=author-image>
-<a href=https://fullstackbio.de/>
-<img src=/images/profile.jpg class="img-circle img-headshot center" alt="Profile Picture">
-</a>
-</div>
-<h1>Full Stack Bioinformatics</h1>
-<p class=lead>From transistors to biomedical insight</p>
-</div>
-<nav>
-<ul class=sidebar-nav>
-<li>
-<a href=https://fullstackbio.de/>Home</a>
-</li>
-<li>
-<a href=/about/>About</a>
-</li><li>
-<a href=/posts/>Posts</a>
-</li><li>
-<a href=/categories/>Categories</a>
-</li><li>
-<a href=/tags/>Tags</a>
-</li>
-</ul>
-</nav>
-<section class=social-icons>
-<a href=https://www.linkedin.com/in/manuel-holtgrewe/ rel=me title=Linkedin target=_blank>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-<a href=https://github.com/holtgrewe rel=me title=GitHub target=_blank>
-<i class="fab fa-github" aria-hidden=true></i>
-</a>
-</section>
-</div>
-</aside>
-<main class="content container">
-<div class=post>
-<h1 class=title>HPC for Bioinformatics (1/?): Introduction</h1>
-<div class=post-date>
-<time datetime=2022-01-03T00:00:00Z>Jan 3, 2022</time> <span class=readtime>&#183; 5 min read</span>
-</div>
-<div>
-<p>This is the first entry in the <em>HPC for Bioinformatics</em> series.
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.106.0"><title>HPC for Bioinformatics (1/?): Introduction &#183; Full Stack Bioinformatics</title><meta name=description content><meta itemprop=name content="HPC for Bioinformatics (1/?): Introduction"><meta itemprop=description content="This is the first entry in the HPC for Bioinformatics series."><meta itemprop=datePublished content="2022-01-03T00:00:00+00:00"><meta itemprop=dateModified content="2022-01-03T00:00:00+00:00"><meta itemprop=wordCount content="1035"><meta itemprop=image content="https://fullstackbio.de/images/profile.jpg"><meta itemprop=keywords content="hpc,"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://fullstackbio.de/images/profile.jpg"><meta name=twitter:title content="HPC for Bioinformatics (1/?): Introduction"><meta name=twitter:description content="This is the first entry in the HPC for Bioinformatics series."><meta property="og:title" content="HPC for Bioinformatics (1/?): Introduction"><meta property="og:description" content="This is the first entry in the HPC for Bioinformatics series."><meta property="og:type" content="article"><meta property="og:url" content="https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/"><meta property="og:image" content="https://fullstackbio.de/images/profile.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-03T00:00:00+00:00"><meta property="article:modified_time" content="2022-01-03T00:00:00+00:00"><meta property="og:site_name" content="Full Stack Bioinformatics"><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://fullstackbio.de/#author","name":null,"image":{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg"},"description":"From transistors to biomedical insight"},{"@type":"WebSite","@id":"https://fullstackbio.de/#website","url":"https://fullstackbio.de/","name":"Full Stack Bioinformatics","description":"From transistors to biomedical insight","publisher":{"@id":"https://fullstackbio.de/#author"},"inLanguage":"en"},{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg","caption":"Full Stack Bioinformatics"},{"@type":"WebPage","@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage","url":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/","name":"HPC for Bioinformatics (1/?): Introduction","isPartOf":{"@id":"https://fullstackbio.de/#website"},"about":{"@id":"https://fullstackbio.de/#author"},"datePublished":"2022-01-03T00:00:00+00:00","dateModified":"2022-01-03T00:00:00+00:00","description":"This is the first entry in the HPC for Bioinformatics series.","inLanguage":"en","potentialAction":[{"@type":"ReadAction","target":["https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/"]}]},{"@type":"Article","isPartOf":{"@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage"},"mainEntityOfPage":{"@id":"https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#webpage"},"headline":"HPC for Bioinformatics (1/?): Introduction","datePublished":"2022-01-03T00:00:00+00:00","dateModified":"2022-01-03T00:00:00+00:00","publisher":{"@id":"https://fullstackbio.de/#author"},"keywords":["hpc"],"articleSection":[],"inLanguage":"en","author":{"@type":"Person","name":"Manuel Holtgrewe"},"potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://fullstackbio.de/posts/2022/2022-01-03-hpc-bio-intro/#comments"]}]}]}</script><link type=text/css rel=stylesheet href=/css/print.css media=print><link type=text/css rel=stylesheet href=/css/poole.css><link type=text/css rel=stylesheet href=/css/hyde.css><style type=text/css>.sidebar{background-color:#878b94}.read-more-link a{border-color:#878b94}.read-more-link a:hover{background-color:#878b94}.pagination li a{color:#878b94;border:1px solid #878b94}.pagination li.active a{background-color:#878b94}.pagination li a:hover{background-color:#878b94;opacity:.75}footer a,.content a,.related-posts li a:hover{color:#878b94}</style><link type=text/css rel=stylesheet href=/css/custom.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous></head><body><aside class=sidebar><div class=container><div class=sidebar-about><div class=author-image><a href=https://fullstackbio.de/><img src=/images/profile.jpg class="img-circle img-headshot center" alt="Profile Picture"></a></div><h1>Full Stack Bioinformatics</h1><p class=lead>From transistors to biomedical insight</p></div><nav><ul class=sidebar-nav><li><a href=https://fullstackbio.de/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/posts/>Posts</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li></ul></nav><section class=social-icons><a href=https://www.linkedin.com/in/manuel-holtgrewe/ rel=me title=Linkedin target=_blank><i class="fab fa-linkedin" aria-hidden=true></i></a>
+<a href=https://github.com/holtgrewe rel=me title=GitHub target=_blank><i class="fab fa-github" aria-hidden=true></i></a></section></div></aside><main class="content container"><div class=post><h1 class=title>HPC for Bioinformatics (1/?): Introduction</h1><div class=post-date><time datetime=2022-01-03T00:00:00Z>Jan 3, 2022</time> <span class=readtime>&#183; 5 min read</span></div><div><p>This is the first entry in the <em>HPC for Bioinformatics</em> series.
 In this series, I will outline my experience with building and operating an HPC system for bioinformatics.
 I will start by outlining the overall history and then plan to discuss more or less random topics.
-The selection will be mostly based on what I find interesting at the time of writing and I will try not to rehash things that have been discussed a lot of times in other places.</p>
-<h2 id=the-origins>The Origins</h2>
-<p>In ca. 2017 the Core Unit Bioinformatics (CUBI) at Berlin Institute of Health took over the organisation and administration of the HPC system.
-Roughly, the hardware setup was as follows:</p>
-<ul>
-<li>ca. 200 Dell PowerEdge M600 series nodes (16 of these go into one M1000e) enclosure,</li>
-<li>a Dell R630 server with two VT100 GPUs,</li>
-<li>4 Dell R630 high memory nodes (2x512GB and 2x1TB RAM),</li>
-<li>2PB of visible storage appliance by DDN based on IBM GPFS (now called SpectrumScale) as &ldquo;tier 1&rdquo; storage,</li>
-<li>10/40GbE interconnect (switches are redundant VLT pairs) with Dell switches,</li>
-<li>about 500TB of visible ZFS storage as NFS shares as &ldquo;tier 2 storage&rdquo;, in a two 60 disk Dell PowerVault enclosures,</li>
-<li>a couple of miscellaneous servers for utility services.</li>
-</ul>
-<p>The user-visible software side of things were:</p>
-<ul>
-<li>CentOS 7 operating system,</li>
-<li>GridEngine scheduler (the open source Son of a Grid Engine variation).</li>
-</ul>
-<p>From the perspective of <code>root</code> important:</p>
-<ul>
-<li>system configuration was based on Puppet,</li>
-<li>bare metal machines were setup using a home cooked PXE boot environment,</li>
-<li>utility machines ran as KVM virtual machines using libvirt,</li>
-<li>we could use the institute&rsquo;s tape library for backups/archive purposes,</li>
-<li>there was one out of band management network in addition to one flat compute network.</li>
-</ul>
-<h2 id=the-current-state-q1-2022>The Current State (Q1 2022)</h2>
-<p>The current, modern state of the system is as follows:</p>
-<ul>
-<li>ca. 150 Dell PowerEdge M600 series nodes (because of space issues in the racks, the others now serve as cold spares),</li>
-<li>the same high memory nodes,</li>
-<li>36 Dell PowerEdge C6420 servers with 25GbE network,</li>
-<li>7 Dell PowerEdge C4130 servers with 4 NVIDIA Tesla V100 GPUs,</li>
-<li>10/40GbE interconnect for the older services, 25/100GbE interconnect for the more recent servers,</li>
-<li>the same 2PB of DDN/GPFS storage (sunsetting by the end of 2022),</li>
-<li>two &ldquo;tier 2&rdquo; Ceph clusters (HDDs) with a raw capacity of 3.5PB each (one primary and one mirror system),</li>
-<li>8 servers as OpenStack compute hosts,</li>
-<li>a &ldquo;tier 1&rdquo; Ceph all-NVME cluster with a raw capacity of 1.5PB (setup is in progress).</li>
-</ul>
-<p>From the user side:</p>
-<ul>
-<li>Rocky Linux 8 operating system,</li>
-<li>Slurm scheduler,</li>
-<li>Open OnDemand Web Portal.</li>
-</ul>
-<p>From the <code>root</code> perspective:</p>
-<ul>
-<li>system configuration based on Ansible,</li>
-<li>streamlined host setup:
-<ul>
-<li>deployment of OpenStack hosts and Ceph servers with <a href=https://docs.openstack.org/kayobe/latest/>Kayobe</a>,</li>
-<li>deployment of baremetal compute hosts with <a href=https://ironicbaremetal.org/>OpenStack Ironic</a>,</li>
-</ul>
-</li>
-<li>backup and archive go to our Tier 2 Ceph clusters,</li>
-<li>relatively flat network structure with out-of-band, private compute, and public network.</li>
-</ul>
-<figure><img src=/posts/2022/2022-01-03-infrastructure-openstack.jpg alt="OpenStack has a module for most of your infrastructure needs!" width=50%><figcaption>
-<p>OpenStack has a module for most of your infrastructure needs!</p>
-</figcaption>
-</figure>
-<h2 id=in-between-proxmox-ve>In Between: Proxmox VE</h2>
-<p>We ran <a href=https://www.proxmox.com/en/proxmox-ve>Proxmox VE (PVE)</a> for some years for management of virtual machines.
+The selection will be mostly based on what I find interesting at the time of writing and I will try not to rehash things that have been discussed a lot of times in other places.</p><h2 id=the-origins>The Origins</h2><p>In ca. 2017 the Core Unit Bioinformatics (CUBI) at Berlin Institute of Health took over the organisation and administration of the HPC system.
+Roughly, the hardware setup was as follows:</p><ul><li>ca. 200 Dell PowerEdge M600 series nodes (16 of these go into one M1000e) enclosure,</li><li>a Dell R630 server with two VT100 GPUs,</li><li>4 Dell R630 high memory nodes (2x512GB and 2x1TB RAM),</li><li>2PB of visible storage appliance by DDN based on IBM GPFS (now called SpectrumScale) as &ldquo;tier 1&rdquo; storage,</li><li>10/40GbE interconnect (switches are redundant VLT pairs) with Dell switches,</li><li>about 500TB of visible ZFS storage as NFS shares as &ldquo;tier 2 storage&rdquo;, in a two 60 disk Dell PowerVault enclosures,</li><li>a couple of miscellaneous servers for utility services.</li></ul><p>The user-visible software side of things were:</p><ul><li>CentOS 7 operating system,</li><li>GridEngine scheduler (the open source Son of a Grid Engine variation).</li></ul><p>From the perspective of <code>root</code> important:</p><ul><li>system configuration was based on Puppet,</li><li>bare metal machines were setup using a home cooked PXE boot environment,</li><li>utility machines ran as KVM virtual machines using libvirt,</li><li>we could use the institute&rsquo;s tape library for backups/archive purposes,</li><li>there was one out of band management network in addition to one flat compute network.</li></ul><h2 id=the-current-state-q1-2022>The Current State (Q1 2022)</h2><p>The current, modern state of the system is as follows:</p><ul><li>ca. 150 Dell PowerEdge M600 series nodes (because of space issues in the racks, the others now serve as cold spares),</li><li>the same high memory nodes,</li><li>36 Dell PowerEdge C6420 servers with 25GbE network,</li><li>7 Dell PowerEdge C4130 servers with 4 NVIDIA Tesla V100 GPUs,</li><li>10/40GbE interconnect for the older services, 25/100GbE interconnect for the more recent servers,</li><li>the same 2PB of DDN/GPFS storage (sunsetting by the end of 2022),</li><li>two &ldquo;tier 2&rdquo; Ceph clusters (HDDs) with a raw capacity of 3.5PB each (one primary and one mirror system),</li><li>8 servers as OpenStack compute hosts,</li><li>a &ldquo;tier 1&rdquo; Ceph all-NVME cluster with a raw capacity of 1.5PB (setup is in progress).</li></ul><p>From the user side:</p><ul><li>Rocky Linux 8 operating system,</li><li>Slurm scheduler,</li><li>Open OnDemand Web Portal.</li></ul><p>From the <code>root</code> perspective:</p><ul><li>system configuration based on Ansible,</li><li>streamlined host setup:<ul><li>deployment of OpenStack hosts and Ceph servers with <a href=https://docs.openstack.org/kayobe/latest/>Kayobe</a>,</li><li>deployment of baremetal compute hosts with <a href=https://ironicbaremetal.org/>OpenStack Ironic</a>,</li></ul></li><li>backup and archive go to our Tier 2 Ceph clusters,</li><li>relatively flat network structure with out-of-band, private compute, and public network.</li></ul><figure><img src=/posts/2022/2022-01-03-infrastructure-openstack.jpg alt="OpenStack has a module for most of your infrastructure needs!" width=50%><figcaption><p>OpenStack has a module for most of your infrastructure needs!</p></figcaption></figure><h2 id=in-between-proxmox-ve>In Between: Proxmox VE</h2><p>We ran <a href=https://www.proxmox.com/en/proxmox-ve>Proxmox VE (PVE)</a> for some years for management of virtual machines.
 PVE is a good solution for running compute servers based on virtual machines and Linux containers (LXC) and Ceph can be used for storage for several versions.
 We have used it both with ZFS based storage and Ceph based storage.
 Using ZFS storage with LXC compute provides excellent performance for database based applications such as our <a href=https://cubi.bihealth.org/software/varfish/>VarFish</a>.
-Using Ceph has the advantage of distributed storage and virtual machines can be migrated between hosts more easily.</p>
-<p>PVE clearly is no &ldquo;cloud&rdquo; solution but a virtualization environment.
+Using Ceph has the advantage of distributed storage and virtual machines can be migrated between hosts more easily.</p><p>PVE clearly is no &ldquo;cloud&rdquo; solution but a virtualization environment.
 This is not bad in itself and gives a stronger feeling of control as one can (and must) specify what is run where.
 However, managing 200+ bare metal nodes is not within its capabilities.
-A very strong point is the easy-to-use user interface.</p>
-<p>We had some issues over the time with the python client library that we used from Ansible for creating VMs and containers in Proxmox.
-An upgrade of PVE would lead to the library not working until the library itself had been patched (or the Ansible module, I cannot remember for certain).</p>
-<h2 id=in-between-xcat>In Between: xCAT</h2>
-<p>We have been using home-cooked PXE environment for several years, based on dnasmasq/tftp and anaconda for system installation.
+A very strong point is the easy-to-use user interface.</p><p>We had some issues over the time with the python client library that we used from Ansible for creating VMs and containers in Proxmox.
+An upgrade of PVE would lead to the library not working until the library itself had been patched (or the Ansible module, I cannot remember for certain).</p><h2 id=in-between-xcat>In Between: xCAT</h2><p>We have been using home-cooked PXE environment for several years, based on dnasmasq/tftp and anaconda for system installation.
 However, managing the PXE directories was tedious, in particular for system upgrade.
-We switched to using <a href=https://xcat.org/>xCAT</a> ca. 2020.</p>
-<p>xCAT (extreme cluster/cloud administration toolkit) is an open source software for managing bare metal infrastructure originally developed by IBM.
+We switched to using <a href=https://xcat.org/>xCAT</a> ca. 2020.</p><p>xCAT (extreme cluster/cloud administration toolkit) is an open source software for managing bare metal infrastructure originally developed by IBM.
 This software is used for the deployment of many large HPC systems on the <a href=https://www.top500.org/>TOP500</a> list.
-Our experience with xCAT was generally OK and a great step forward from a self-built PXE solution.</p>
-<p>My personal main impression is that xCAT is a relatively opaque system based on a large number of bash/perl scripts.
+Our experience with xCAT was generally OK and a great step forward from a self-built PXE solution.</p><p>My personal main impression is that xCAT is a relatively opaque system based on a large number of bash/perl scripts.
 It is open source, so you can go into the sources and find out where the problems are but a lot of things cannot be configured.
 For example, we had an issue with switch network ports not coming up properly (in a cluster not mentioned above that is using arriva switches).
 The way to resolve this involved adding <code>set -x</code> in a bash script in <code>/install/...</code> on the xcat server, looking at the logs and adding a <code>sleep</code> in the xcat source code <strong>in place</strong>.
 The mixture of shell and awk scripts that I saw in the meantime was &mldr; interesting and is probably best described as &ldquo;enterprise grade&rdquo;.
-To be fair, xCAT did its job very well and my main problem was that I could not control it from Ansible and thus automation was problematic.</p>
-<h2 id=to-summarize>To Summarize&mldr;</h2>
-<p>&mldr; I now realize that this is an extremely boring blog entry that is just listing things (at least I did not make any major detour).
-What can be learned from this:</p>
-<ul>
-<li>We have now migrated to OpenStack for managing the compute infrastructure.
-This gives us a <em>single pane of glass</em> for managing our servers in a modern, cloud-based fashion.</li>
-<li>OpenStack <a href=https://docs.openstack.org/kayobe/latest/>Kayobe</a> allows to setup the openstack cluster and other infrastructure (aka &ldquo;undercloud&rdquo;).</li>
-<li>We have migrated to a modern OpenStack cluster scheduler - Slurm.</li>
-<li>We will abandon the commercial storage system and rather than spend money on licenses (and, granted, support) spend it on hardware.</li>
-</ul>
-</div>
-<div>
-<ul class=tags>
-<li>
-<a href=https://fullstackbio.de/tags/hpc/ class=tag-link>hpc</a>
-</li>
-</ul>
-</div>
-</div>
-</main>
-<footer>
-<div>
-<p>
-&copy; Manuel Holtgrewe 2022
-&#183; <a href=https://creativecommons.org/licenses/by-sa/4.0 target=_blank>CC BY-SA 4.0</a>
-</p>
-</div>
-</footer>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script>
+To be fair, xCAT did its job very well and my main problem was that I could not control it from Ansible and thus automation was problematic.</p><h2 id=to-summarize>To Summarize&mldr;</h2><p>&mldr; I now realize that this is an extremely boring blog entry that is just listing things (at least I did not make any major detour).
+What can be learned from this:</p><ul><li>We have now migrated to OpenStack for managing the compute infrastructure.
+This gives us a <em>single pane of glass</em> for managing our servers in a modern, cloud-based fashion.</li><li>OpenStack <a href=https://docs.openstack.org/kayobe/latest/>Kayobe</a> allows to setup the openstack cluster and other infrastructure (aka &ldquo;undercloud&rdquo;).</li><li>We have migrated to a modern OpenStack cluster scheduler - Slurm.</li><li>We will abandon the commercial storage system and rather than spend money on licenses (and, granted, support) spend it on hardware.</li></ul></div><div><ul class=tags><li><a href=https://fullstackbio.de/tags/hpc/ class=tag-link>hpc</a></li></ul></div></div></main><footer><div><p>&copy; Manuel Holtgrewe 2022
+&#183; <a href=https://creativecommons.org/licenses/by-sa/4.0 target=_blank>CC BY-SA 4.0</a></p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script>
 <script src=/js/jquery.min.js></script>
-<script src=/js/soho.js></script>
-</body>
-</html>
+<script src=/js/soho.js></script></body></html>

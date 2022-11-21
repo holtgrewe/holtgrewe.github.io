@@ -1,198 +1,59 @@
-<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=generator content="Hugo 0.92.1">
-<title>HPC for Bioinformatics (2/?): Machine Installation &#183; Full Stack Bioinformatics</title>
-<meta name=description content>
-<meta itemprop=name content="HPC for Bioinformatics (2/?): Machine Installation">
-<meta itemprop=description content="This post describes the two basic options for system installation that we have tried so far."><meta itemprop=datePublished content="2022-01-10T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-01-10T00:00:00+00:00">
-<meta itemprop=wordCount content="1292"><meta itemprop=image content="https://fullstackbio.de/images/profile.jpg">
-<meta itemprop=keywords content="hpc,">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://fullstackbio.de/images/profile.jpg">
-<meta name=twitter:title content="HPC for Bioinformatics (2/?): Machine Installation">
-<meta name=twitter:description content="This post describes the two basic options for system installation that we have tried so far.">
-<meta property="og:title" content="HPC for Bioinformatics (2/?): Machine Installation">
-<meta property="og:description" content="This post describes the two basic options for system installation that we have tried so far.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/"><meta property="og:image" content="https://fullstackbio.de/images/profile.jpg"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-10T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-01-10T00:00:00+00:00"><meta property="og:site_name" content="Full Stack Bioinformatics">
-<script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://fullstackbio.de/#author","name":null,"image":{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg"},"description":"From transistors to biomedical insight"},{"@type":"WebSite","@id":"https://fullstackbio.de/#website","url":"https://fullstackbio.de/","name":"Full Stack Bioinformatics","description":"From transistors to biomedical insight","publisher":{"@id":"https://fullstackbio.de/#author"},"inLanguage":"en"},{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg","caption":"Full Stack Bioinformatics"},{"@type":"WebPage","@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage","url":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/","name":"HPC for Bioinformatics (2/?): Machine Installation","isPartOf":{"@id":"https://fullstackbio.de/#website"},"about":{"@id":"https://fullstackbio.de/#author"},"datePublished":"2022-01-10T00:00:00+00:00","dateModified":"2022-01-10T00:00:00+00:00","description":"This post describes the two basic options for system installation that we have tried so far.","inLanguage":"en","potentialAction":[{"@type":"ReadAction","target":["https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/"]}]},{"@type":"Article","isPartOf":{"@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage"},"mainEntityOfPage":{"@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage"},"headline":"HPC for Bioinformatics (2/?): Machine Installation","datePublished":"2022-01-10T00:00:00+00:00","dateModified":"2022-01-10T00:00:00+00:00","publisher":{"@id":"https://fullstackbio.de/#author"},"keywords":["hpc"],"articleSection":[],"inLanguage":"en","author":{"@type":"Person","name":"Manuel Holtgrewe"},"potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#comments"]}]}]}</script>
-<link type=text/css rel=stylesheet href=/css/print.css media=print>
-<link type=text/css rel=stylesheet href=/css/poole.css>
-<link type=text/css rel=stylesheet href=/css/hyde.css>
-<style type=text/css>.sidebar{background-color:#878b94}.read-more-link a{border-color:#878b94}.read-more-link a:hover{background-color:#878b94}.pagination li a{color:#878b94;border:1px solid #878b94}.pagination li.active a{background-color:#878b94}.pagination li a:hover{background-color:#878b94;opacity:.75}footer a,.content a,.related-posts li a:hover{color:#878b94}</style>
-<link type=text/css rel=stylesheet href=/css/custom.css>
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous>
-</head>
-<body>
-<aside class=sidebar>
-<div class=container>
-<div class=sidebar-about>
-<div class=author-image>
-<a href=https://fullstackbio.de/>
-<img src=/images/profile.jpg class="img-circle img-headshot center" alt="Profile Picture">
-</a>
-</div>
-<h1>Full Stack Bioinformatics</h1>
-<p class=lead>From transistors to biomedical insight</p>
-</div>
-<nav>
-<ul class=sidebar-nav>
-<li>
-<a href=https://fullstackbio.de/>Home</a>
-</li>
-<li>
-<a href=/about/>About</a>
-</li><li>
-<a href=/posts/>Posts</a>
-</li><li>
-<a href=/categories/>Categories</a>
-</li><li>
-<a href=/tags/>Tags</a>
-</li>
-</ul>
-</nav>
-<section class=social-icons>
-<a href=https://www.linkedin.com/in/manuel-holtgrewe/ rel=me title=Linkedin target=_blank>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-<a href=https://github.com/holtgrewe rel=me title=GitHub target=_blank>
-<i class="fab fa-github" aria-hidden=true></i>
-</a>
-</section>
-</div>
-</aside>
-<main class="content container">
-<div class=post>
-<h1 class=title>HPC for Bioinformatics (2/?): Machine Installation</h1>
-<div class=post-date>
-<time datetime=2022-01-10T00:00:00Z>Jan 10, 2022</time> <span class=readtime>&#183; 7 min read</span>
-</div>
-<div>
-<p>This post describes the two basic options for system installation that we have tried so far.
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.106.0"><title>HPC for Bioinformatics (2/?): Machine Installation &#183; Full Stack Bioinformatics</title><meta name=description content><meta itemprop=name content="HPC for Bioinformatics (2/?): Machine Installation"><meta itemprop=description content="This post describes the two basic options for system installation that we have tried so far."><meta itemprop=datePublished content="2022-01-10T00:00:00+00:00"><meta itemprop=dateModified content="2022-01-10T00:00:00+00:00"><meta itemprop=wordCount content="1292"><meta itemprop=image content="https://fullstackbio.de/images/profile.jpg"><meta itemprop=keywords content="hpc,"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://fullstackbio.de/images/profile.jpg"><meta name=twitter:title content="HPC for Bioinformatics (2/?): Machine Installation"><meta name=twitter:description content="This post describes the two basic options for system installation that we have tried so far."><meta property="og:title" content="HPC for Bioinformatics (2/?): Machine Installation"><meta property="og:description" content="This post describes the two basic options for system installation that we have tried so far."><meta property="og:type" content="article"><meta property="og:url" content="https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/"><meta property="og:image" content="https://fullstackbio.de/images/profile.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-10T00:00:00+00:00"><meta property="article:modified_time" content="2022-01-10T00:00:00+00:00"><meta property="og:site_name" content="Full Stack Bioinformatics"><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://fullstackbio.de/#author","name":null,"image":{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg"},"description":"From transistors to biomedical insight"},{"@type":"WebSite","@id":"https://fullstackbio.de/#website","url":"https://fullstackbio.de/","name":"Full Stack Bioinformatics","description":"From transistors to biomedical insight","publisher":{"@id":"https://fullstackbio.de/#author"},"inLanguage":"en"},{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg","caption":"Full Stack Bioinformatics"},{"@type":"WebPage","@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage","url":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/","name":"HPC for Bioinformatics (2/?): Machine Installation","isPartOf":{"@id":"https://fullstackbio.de/#website"},"about":{"@id":"https://fullstackbio.de/#author"},"datePublished":"2022-01-10T00:00:00+00:00","dateModified":"2022-01-10T00:00:00+00:00","description":"This post describes the two basic options for system installation that we have tried so far.","inLanguage":"en","potentialAction":[{"@type":"ReadAction","target":["https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/"]}]},{"@type":"Article","isPartOf":{"@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage"},"mainEntityOfPage":{"@id":"https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#webpage"},"headline":"HPC for Bioinformatics (2/?): Machine Installation","datePublished":"2022-01-10T00:00:00+00:00","dateModified":"2022-01-10T00:00:00+00:00","publisher":{"@id":"https://fullstackbio.de/#author"},"keywords":["hpc"],"articleSection":[],"inLanguage":"en","author":{"@type":"Person","name":"Manuel Holtgrewe"},"potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://fullstackbio.de/posts/2022/2022-01-10-machine-installation-anaconda/#comments"]}]}]}</script><link type=text/css rel=stylesheet href=/css/print.css media=print><link type=text/css rel=stylesheet href=/css/poole.css><link type=text/css rel=stylesheet href=/css/hyde.css><style type=text/css>.sidebar{background-color:#878b94}.read-more-link a{border-color:#878b94}.read-more-link a:hover{background-color:#878b94}.pagination li a{color:#878b94;border:1px solid #878b94}.pagination li.active a{background-color:#878b94}.pagination li a:hover{background-color:#878b94;opacity:.75}footer a,.content a,.related-posts li a:hover{color:#878b94}</style><link type=text/css rel=stylesheet href=/css/custom.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous></head><body><aside class=sidebar><div class=container><div class=sidebar-about><div class=author-image><a href=https://fullstackbio.de/><img src=/images/profile.jpg class="img-circle img-headshot center" alt="Profile Picture"></a></div><h1>Full Stack Bioinformatics</h1><p class=lead>From transistors to biomedical insight</p></div><nav><ul class=sidebar-nav><li><a href=https://fullstackbio.de/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/posts/>Posts</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li></ul></nav><section class=social-icons><a href=https://www.linkedin.com/in/manuel-holtgrewe/ rel=me title=Linkedin target=_blank><i class="fab fa-linkedin" aria-hidden=true></i></a>
+<a href=https://github.com/holtgrewe rel=me title=GitHub target=_blank><i class="fab fa-github" aria-hidden=true></i></a></section></div></aside><main class="content container"><div class=post><h1 class=title>HPC for Bioinformatics (2/?): Machine Installation</h1><div class=post-date><time datetime=2022-01-10T00:00:00Z>Jan 10, 2022</time> <span class=readtime>&#183; 7 min read</span></div><div><p>This post describes the two basic options for system installation that we have tried so far.
 The wonderful people at <a href=https://www.stackhpc.com>StackHPC</a> have a <a href=https://www.stackhpc.com/ironic-idrac-ztp.html>blog post on &ldquo;zero touch provisioning&rdquo;</a> that has more technical depth than mine.
 This is probably what one aim for but we are not there yet at the moment of writing.
-Rather, this post gives some perspective on how to manage the installation 200 computers with &ldquo;few touches&rdquo;, albeit not zero.</p>
-<p>First, let us define the problem taht we need to solve in more detail: installing the operating system.
+Rather, this post gives some perspective on how to manage the installation 200 computers with &ldquo;few touches&rdquo;, albeit not zero.</p><p>First, let us define the problem taht we need to solve in more detail: installing the operating system.
 &ldquo;What is hard and why is this necessary?&rdquo; you might ask.
-You probably bought your private laptop with an operating system preinstalled and your work place/school might provide you with computers with preinstalled operating systems.</p>
-<p>How does the vendor of your laptop install the operating system?
+You probably bought your private laptop with an operating system preinstalled and your work place/school might provide you with computers with preinstalled operating systems.</p><p>How does the vendor of your laptop install the operating system?
 Most probably, they install it once on one machine and configure it such that you can make the inital setup like creating a user on the first start.
 Then they copy the whole disk as one <strong>disk image</strong> to a server and copy this disk image to hundreds of disks that they then use for assemling your laptop.
 This approach can be very useful if you need to manage a hand full of laptops in a school, for example, that are given out for courses.
 If all laptops are the same and you make a copy of the initial image, e.g., with <a href=https://clonezilla.org/>Clonezilla</a> then you can restore the laptops within a few minutes with very few clicks.
 You boot the laptop from a USB stick into Clonezilla, copy the disk image from an external hard drive and the laptop will come up with exactly the same configuration as you created the image.
-Pretty neat, eh?</p>
-<h2 id=introducing-pxe>Introducing PXE</h2>
-<p>But clearly this does not scale up to two hundred servers.
+Pretty neat, eh?</p><h2 id=introducing-pxe>Introducing PXE</h2><p>But clearly this does not scale up to two hundred servers.
 Also, each server needs to be setup with its own IP address and host name.
-For this, the <a href=https://en.wikipedia.org/wiki/Preboot_Execution_Environment>preboot execution environment</a> (PXE, pronounced as &ldquo;pixie&rdquo;) has been developed in the 1990s.</p>
-<figure><img src=/posts/2022/2022-01-10-pxe-boot-wikipedia.png alt="PXE boot according to Wikipedia. [Source]" width=50%><figcaption>
-<p>PXE boot according to Wikipedia. <a href=https://en.wikipedia.org/wiki/File:PXE_diagram.png>[Source]</a></p>
-</figcaption>
-</figure>
-<p>So what exactly is PXE?
+For this, the <a href=https://en.wikipedia.org/wiki/Preboot_Execution_Environment>preboot execution environment</a> (PXE, pronounced as &ldquo;pixie&rdquo;) has been developed in the 1990s.</p><figure><img src=/posts/2022/2022-01-10-pxe-boot-wikipedia.png alt="PXE boot according to Wikipedia. [Source]" width=50%><figcaption><p>PXE boot according to Wikipedia. <a href=https://en.wikipedia.org/wiki/File:PXE_diagram.png>[Source]</a></p></figcaption></figure><p>So what exactly is PXE?
 PXE is an open and vendor-independent standard for a client-server environment for a client-server boot environment.
 Shortly, the client computer boots such that the server can control what action the client does next.
-This action can be the installation of an operating system with a particular configuration.</p>
-<p>But how exactly does this work?
+This action can be the installation of an operating system with a particular configuration.</p><p>But how exactly does this work?
 When booting in PXE mode, the client uses <a href=https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol>DHCP (dynamic host configuration protocol)</a> to obtain its initial network configuration and other information.
 The network configuration includes its IP address and addresses of DNS servers and the ntwork standard gateway.
 The other information includes the address of a (minimal) system image to boot and configuration to load.
 The server boots into this system image and loads the configuration.
-This configuration provides the information what to do next.</p>
-<p>In the case of Red Hat based operating systems such as CentOS and Rocky Linux, <a href=https://en.wikipedia.org/wiki/Anaconda_(installer)>Anaconda</a> is started which installs the operating system from the network and applies certain configuration, including the host name.
+This configuration provides the information what to do next.</p><p>In the case of Red Hat based operating systems such as CentOS and Rocky Linux, <a href=https://en.wikipedia.org/wiki/Anaconda_(installer)>Anaconda</a> is started which installs the operating system from the network and applies certain configuration, including the host name.
 The server runs through an automated operating system installation that uses the same installer that you would use for manually installing Rocky Linux, just with all options prefilled.
 After the installation the machine reboots from the disks and you have a blank installation of your server that can be configured further.
-When configured appropriately, the server could run a script on the first startup to perform additional setup steps with automation tools such as Ansible or Puppet.</p>
-<h2 id=home-build-pxe>Home-Build PXE</h2>
-<p>Our first iteration of cluster setup used a manual setup for PXE boot.
+When configured appropriately, the server could run a script on the first startup to perform additional setup steps with automation tools such as Ansible or Puppet.</p><h2 id=home-build-pxe>Home-Build PXE</h2><p>Our first iteration of cluster setup used a manual setup for PXE boot.
 You have to get everything &ldquo;just right&rdquo; but on the other hand you can understand and control each component.
-You will need</p>
-<ul>
-<li>a DHCP server, we used <code>dnsmasq</code>,</li>
-<li>a TFTP server, we used the one built into <code>dnsmasq</code>,</li>
-<li>proper minimal images for the PXE boot and configuration file served over TFTP (you can find a lot of tutorials for this online),</li>
-<li>a HTTP server that serves the packages to be used during the installation.</li>
-</ul>
-<p>When everything is setup properly, your server will boot into the anaconda installer, installation will run and it will come up with a fresh, say, CentOS installation.
-Of course, you should distribute SSH keys to your server so you can login once the server boots.</p>
-<h2 id=pxe-with-xcat>PXE with xCAT</h2>
-<p>We used xCAT for the same installation.
+You will need</p><ul><li>a DHCP server, we used <code>dnsmasq</code>,</li><li>a TFTP server, we used the one built into <code>dnsmasq</code>,</li><li>proper minimal images for the PXE boot and configuration file served over TFTP (you can find a lot of tutorials for this online),</li><li>a HTTP server that serves the packages to be used during the installation.</li></ul><p>When everything is setup properly, your server will boot into the anaconda installer, installation will run and it will come up with a fresh, say, CentOS installation.
+Of course, you should distribute SSH keys to your server so you can login once the server boots.</p><h2 id=pxe-with-xcat>PXE with xCAT</h2><p>We used xCAT for the same installation.
 xCAT can be used as a &ldquo;middleware&rdquo; where you configure the compute servers in a so-called <code>stanza</code> format that you pass to commands calls <code>mkdef</code>, for example.
-The stanza format looks like this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>compute01:
-    objtype=node
-    arch=x86_64
-    mgt=ipmi
-    cons=ipmi
-    bmc=10.1.0.12
-    nictypes.etn0=ethernet
-    nicips.eth0=11.10.1.3
-    nichostnamesuffixes.eth0=-eth0
-    nicnetworks.eth0=clstrnet1</code></pre></div>
-<p>You can clearly see that xCAT is from the early 2000s where JSON and YAML where not a thing yet.
+The stanza format looks like this:</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>compute01:
+</span></span><span style=display:flex><span>    objtype=node
+</span></span><span style=display:flex><span>    arch=x86_64
+</span></span><span style=display:flex><span>    mgt=ipmi
+</span></span><span style=display:flex><span>    cons=ipmi
+</span></span><span style=display:flex><span>    bmc=10.1.0.12
+</span></span><span style=display:flex><span>    nictypes.etn0=ethernet
+</span></span><span style=display:flex><span>    nicips.eth0=11.10.1.3
+</span></span><span style=display:flex><span>    nichostnamesuffixes.eth0=-eth0
+</span></span><span style=display:flex><span>    nicnetworks.eth0=clstrnet1</span></span></code></pre></div><p>You can clearly see that xCAT is from the early 2000s where JSON and YAML where not a thing yet.
 Also, the definition is limited to two levels and for specifying deeper nesting, you need interesting syntax.
 E.g., for setting two IPs, you would use <code>nicips.eth0=11.10.1.3|12.10.1.3</code>.
-xCAT will then generate the appropriate <code>dhcpd</code> configuration and manually allocate IPs in the <code>dhcpd</code> leases file (which occasionally broke in our hands and we had to manually clear the file, restart <code>dhcpd</code> and generate the configuration fresh).</p>
-<h2 id=the-ironic-way>The Ironic Way</h2>
-<p>Ironic is an OpenStack project that allows you to manage bare metal hardware.
+xCAT will then generate the appropriate <code>dhcpd</code> configuration and manually allocate IPs in the <code>dhcpd</code> leases file (which occasionally broke in our hands and we had to manually clear the file, restart <code>dhcpd</code> and generate the configuration fresh).</p><h2 id=the-ironic-way>The Ironic Way</h2><p>Ironic is an OpenStack project that allows you to manage bare metal hardware.
 One main advantage is that once everything is setup properly, you can schedule bare metal servers using the same way that OpenStack uses for running virtual machines (the component for managing compute in OpenStack is called <em>nova</em>).
 This is available to you in the Ansible collection <a href=https://docs.openstack.org/openstack-ansible/latest/>openstack.cloud</a> and you only specify a different &ldquo;machine flavor&rdquo; to get a bare metal machine instead of a virtual one.
 This makes it very easy to have a test/staging environment, make everything work there and then roll it out on bare metal.
 Further plus points is the comprehensive documentation (in particular when compared to xCAT), the ironic community is much larger than xCAT (which appears to be mainly a developer at IBM), and the ironic people are extremely nice and friendly on IRC.
-What&rsquo;s not to love?</p>
-<figure><img src=/posts/2022/2022-01-10-ironic-logo.png alt="The ironic &amp;quot;Bear Metal&amp;quot; mascot. [Source]" width=30%><figcaption>
-<p>The ironic "Bear Metal" mascot. <a href=https://wiki.openstack.org/wiki/Ironic>[Source]</a></p>
-</figcaption>
-</figure>
-<p>Deployment with ironic works differently.
+What&rsquo;s not to love?</p><figure><img src=/posts/2022/2022-01-10-ironic-logo.png alt="The ironic &amp;quot;Bear Metal&amp;quot; mascot. [Source]" width=30%><figcaption><p>The ironic "Bear Metal" mascot. <a href=https://wiki.openstack.org/wiki/Ironic>[Source]</a></p></figcaption></figure><p>Deployment with ironic works differently.
 Note that ironic consists of several components and I will not go into details here.
 Shortly, ironic performs deployment buy <strong>copying disk images to your hard drive instead of running an installer</strong>.
-How to obtain these disk images will be topic of another post.</p>
-<p>How does ironic achieve this?
+How to obtain these disk images will be topic of another post.</p><p>How does ironic achieve this?
 On installation, ironic makes the server PXE boot into an an image running python-ironic-agent.
 This agent then calls back into an API provided by openstack and loads a disk image, e.g., your favourite Ubuntu or Rocky Linux image, and will write it to your disk.
 When using so-called &ldquo;cloud-ready&rdquo; images, these images will run <a href=https://cloudinit.readthedocs.io/en/latest/>cloud-init</a> on startup with will configure the bare metal machine&rsquo;s network settings (and others) to use the correct IP.
 This means that <strong>installations are much faster</strong> than when falling back to anaconda and you can even get a head&rsquo;s start by, e.g., creating an image with the latest and greatest operating system, software, and patches, and deploy them to all of your dozens, or hundreds, of servers.
-Pretty neat, eh?</p>
-<h2 id=wrap-up>Wrap-Up</h2>
-<p>To summarize:</p>
-<ul>
-<li>PXE is an open standard built upon the DHCP and TFTP protocols that enables automated network installation of your hosts (iPXE is the more modern incarnation that also supports UEFI boots).</li>
-<li>xCAT is a useful middleware for installing your cluster with PXE (of course, it goes beyond this).</li>
-<li>OpenStack Ironic is a sophisticated component to perform full life cycle of your hardware (that also works standalone, by the way).</li>
-</ul>
-<h2 id=further-reading>Further Reading</h2>
-<ul>
-<li><a href=https://superuser.openstack.org/articles/ironic-bare-metal-case-study-cern/>&ldquo;OpenStack Ironic Bare Metal Program case study: CERN&rdquo;</a>, <a href=https://superuser.openstack.org>Superuser Magazine</a>, April 29, 2019.</li>
-<li><a href=https://superuser.openstack.org/articles/openstack-ironic-bare-metal-program-case-study-stackhpc/>&ldquo;OpenStack Ironic Bare Metal Program case study: StackHPC&rdquo;</a>, <a href=https://superuser.openstack.org>Superuser Magazine</a>, July 23, 2019.</li>
-</ul>
-</div>
-<div>
-<ul class=tags>
-<li>
-<a href=https://fullstackbio.de/tags/hpc/ class=tag-link>hpc</a>
-</li>
-</ul>
-</div>
-</div>
-</main>
-<footer>
-<div>
-<p>
-&copy; Manuel Holtgrewe 2022
-&#183; <a href=https://creativecommons.org/licenses/by-sa/4.0 target=_blank>CC BY-SA 4.0</a>
-</p>
-</div>
-</footer>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script>
+Pretty neat, eh?</p><h2 id=wrap-up>Wrap-Up</h2><p>To summarize:</p><ul><li>PXE is an open standard built upon the DHCP and TFTP protocols that enables automated network installation of your hosts (iPXE is the more modern incarnation that also supports UEFI boots).</li><li>xCAT is a useful middleware for installing your cluster with PXE (of course, it goes beyond this).</li><li>OpenStack Ironic is a sophisticated component to perform full life cycle of your hardware (that also works standalone, by the way).</li></ul><h2 id=further-reading>Further Reading</h2><ul><li><a href=https://superuser.openstack.org/articles/ironic-bare-metal-case-study-cern/>&ldquo;OpenStack Ironic Bare Metal Program case study: CERN&rdquo;</a>, <a href=https://superuser.openstack.org>Superuser Magazine</a>, April 29, 2019.</li><li><a href=https://superuser.openstack.org/articles/openstack-ironic-bare-metal-program-case-study-stackhpc/>&ldquo;OpenStack Ironic Bare Metal Program case study: StackHPC&rdquo;</a>, <a href=https://superuser.openstack.org>Superuser Magazine</a>, July 23, 2019.</li></ul></div><div><ul class=tags><li><a href=https://fullstackbio.de/tags/hpc/ class=tag-link>hpc</a></li></ul></div></div></main><footer><div><p>&copy; Manuel Holtgrewe 2022
+&#183; <a href=https://creativecommons.org/licenses/by-sa/4.0 target=_blank>CC BY-SA 4.0</a></p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script>
 <script src=/js/jquery.min.js></script>
-<script src=/js/soho.js></script>
-</body>
-</html>
+<script src=/js/soho.js></script></body></html>
