@@ -84,5 +84,5 @@ series = "series"
     lineNos = false
     lineNumbersInTable = true
     noClasses = true
-    style = 'monokai'
+    style = 'friendly'
     tabWidth = 4
