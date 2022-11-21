@@ -12,8 +12,10 @@ images:
 ---
 
 This post deals with the basics "and beyond" of job control in Bash.
-The [Bourn Again Shell (Bash)](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) arguably is the most widely used POSIX-compliant shell.
+The [Bourne Again Shell (Bash)](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) arguably is the most widely used POSIX-compliant shell.
 It has been around since 1989 and is still alive and kicking.
+
+<!--more-->
 
 {{< figure src="/posts/2022/2022-11-21-shell-etching.jpg" width="50%" caption="'clam shell as an etching' according to [[Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion)]." >}}
 
