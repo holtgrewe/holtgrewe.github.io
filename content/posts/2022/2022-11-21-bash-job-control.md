@@ -193,6 +193,24 @@ Programs can also **mask** this, in other word prevent the program from being pa
 One example if `lftp`.
 Here, your best bet is to execute the Bash from within lftp is to execute a new session with `! bash`.
 
+## Alternatives to Disown
+
+The `nohup` command is a handy alternative to moving jobs to the background and calling `disown` on them.
+The following commands will launch two background jobs through the `nohup` command.
+
+```bash
+$ nohup sleep infinity &
+nohup: ignoring input and appending output to 'nohup.out'
+$ nohup sleep infinity >nohup2.out &
+nohup: ignoring input and redirecting stderr to stdout
+```
+
+By default, nohup will redirect stdout and stderr to `nohup.out`.
+The command will mask the `HANGUP` signal to jobs.
+If the current Bash session terminates (e.g., if the SSH connection breaks) then the processes launched via `nohup` will continue to run.
+
+If your use case are keeping jobs running on remote hosts, you should better considre tools such as `screen` and `tmux`.
+
 ## Further Reading
 
 If you made it so far then thank you for your interest.
