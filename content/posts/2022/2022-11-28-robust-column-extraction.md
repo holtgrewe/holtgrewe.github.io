@@ -47,7 +47,7 @@ Wonderful.
 
 Let us take a test drive.
 
-```
+```bash
 $ cut -f 1 test.tsv
 col1
 a1
@@ -61,7 +61,7 @@ b1      b2
 Neat, we can also print more than one column.
 However, the following might disappoint you.
 
-```
+```bash
 $ cut -f 2,1 test.tsv
 col1    col2
 a1      a2
@@ -73,7 +73,7 @@ More on this later.
 
 Note that we can also change the delimiter.
 
-```
+```bash
 $ head -n 3 /etc/passwd | cut -d : -f 1,2
 root:x
 daemon:x
@@ -83,7 +83,7 @@ bin:x
 Neat.
 You can also cut out certain bytes.
 
-```
+```bash
 $ head -n 3 /etc/passwd | cut -b 2-4
 oot
 aem
@@ -95,7 +95,7 @@ in:
 What if you are interested in the last bytes of each line?
 Did you know about `rev`?
 
-```
+```bash
 $ head -n 3 /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
@@ -113,7 +113,7 @@ I find this really neat.
 By the way, did you now about `tac`?
 `tac` is the opposite of `cat` and allows you to print a text file line by line, starting with the last one and ending with the first one.
 
-```
+```bash
 $ tac /etc/passwd | head -n 3
 rtkit:x:114:123:RealtimeKit,,,:/proc:/usr/sbin/nologin
 redis:x:113:122::/var/lib/redis:/usr/sbin/nologin
@@ -122,7 +122,21 @@ postgres:x:112:121:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
 
 {{< figure src="/posts/2022/2022-12-10-laughing-cat.png" width="50%" caption="'a cat laughing madly as an etching' according to [[Dalle-E 2](https://labs.openai.com)]." >}}
 
-
 ## `awk` -- a Text Wrangler's Best Friend
 
+Of course, you could write a little program that does the column extraction.
+For example, you can pass a commands links to the Python interpreter like this:
+`python -c "print('Hello'); print('World')"`.
+However, why not try a programming language that is focused at string processing.
+Modern Linux distributions ship with a couple of them preinstalled: sed, grep, awk, perl.
+
+You will most likely know `grep` which allows you to find lines matching a certain pattern (not of use here).
+Sed is the **s**tream **ed**itor and provides a very terse (you could say hard to read) language for manipulating lines either interpreted as fields or based on regular expressions.
+With sed, we would probably express the extraction of a column by deleting all others or all text before and after the column.
+This sounds not so helpful for our task.
+Most people will know perl which is of course up to the task but quite bulky for such a simple task.
+
 {{< figure src="/posts/2022/2022-11-28-lion.jpg" width="50%" caption="'a lion tamer having a lion jump through a burning hoop as an etching' according to [[Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion)]." >}}
+
+Let me close with a bonus tip.
+Famous Heng Li of BWA (and other) fame has written a [bioawk](https://github.com/lh3/bioawk) that attempts to bring the simplicity and power of Awk to bioinformatics file formats.
