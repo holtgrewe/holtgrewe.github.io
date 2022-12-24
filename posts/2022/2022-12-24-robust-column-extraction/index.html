@@ -1,0 +1,132 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.109.0"><title>Unix Sleight of Hand (2/?): Robust Column Extraction &#183; Full Stack Bioinformatics</title><meta name=description content><meta itemprop=name content="Unix Sleight of Hand (2/?): Robust Column Extraction"><meta itemprop=description content="Many Bioinformaticians spend a lot of their time handling text files.
+Linux (and other Unixes) excel at processing text files and offer many tools for handling it.
+However, etracting a particular column from text files is surprisingly hard.
+This blog post explores some robust solutions."><meta itemprop=datePublished content="2022-12-24T00:00:00+00:00"><meta itemprop=dateModified content="2022-12-24T00:00:00+00:00"><meta itemprop=wordCount content="1050"><meta itemprop=image content="https://fullstackbio.de/posts/2022/2022-11-28-fishermen.jpg"><meta itemprop=keywords content="bash,sleight of hand,"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://fullstackbio.de/posts/2022/2022-11-28-fishermen.jpg"><meta name=twitter:title content="Unix Sleight of Hand (2/?): Robust Column Extraction"><meta name=twitter:description content="Many Bioinformaticians spend a lot of their time handling text files.
+Linux (and other Unixes) excel at processing text files and offer many tools for handling it.
+However, etracting a particular column from text files is surprisingly hard.
+This blog post explores some robust solutions."><meta property="og:title" content="Unix Sleight of Hand (2/?): Robust Column Extraction"><meta property="og:description" content="Many Bioinformaticians spend a lot of their time handling text files.
+Linux (and other Unixes) excel at processing text files and offer many tools for handling it.
+However, etracting a particular column from text files is surprisingly hard.
+This blog post explores some robust solutions."><meta property="og:type" content="article"><meta property="og:url" content="https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/"><meta property="og:image" content="https://fullstackbio.de/posts/2022/2022-11-28-fishermen.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-12-24T00:00:00+00:00"><meta property="article:modified_time" content="2022-12-24T00:00:00+00:00"><meta property="og:site_name" content="Full Stack Bioinformatics"><script type=application/ld+json>{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://fullstackbio.de/#author","name":null,"image":{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg"},"description":"From transistors to biomedical insight"},{"@type":"WebSite","@id":"https://fullstackbio.de/#website","url":"https://fullstackbio.de/","name":"Full Stack Bioinformatics","description":"From transistors to biomedical insight","publisher":{"@id":"https://fullstackbio.de/#author"},"inLanguage":"en"},{"@type":"ImageObject","url":"https://fullstackbio.de/images/profile.jpg","caption":"Full Stack Bioinformatics"},{"@type":"WebPage","@id":"https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/#webpage","url":"https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/","name":"Unix Sleight of Hand (2/?): Robust Column Extraction","isPartOf":{"@id":"https://fullstackbio.de/#website"},"about":{"@id":"https://fullstackbio.de/#author"},"datePublished":"2022-12-24T00:00:00+00:00","dateModified":"2022-12-24T00:00:00+00:00","description":"\u003cp\u003eMany Bioinformaticians spend a lot of their time handling text files.\nLinux (and other Unixes) excel at processing text files and offer many tools for handling it.\nHowever, etracting a particular column from text files is surprisingly hard.\nThis blog post explores some robust solutions.\u003c/p\u003e","inLanguage":"en","potentialAction":[{"@type":"ReadAction","target":["https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/"]}]},{"@type":"Article","isPartOf":{"@id":"https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/#webpage"},"mainEntityOfPage":{"@id":"https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/#webpage"},"headline":"Unix Sleight of Hand (2/?): Robust Column Extraction","image":["https://fullstackbio.de/posts/2022/2022-11-28-fishermen.jpg"],"datePublished":"2022-12-24T00:00:00+00:00","dateModified":"2022-12-24T00:00:00+00:00","publisher":{"@id":"https://fullstackbio.de/#author"},"keywords":["bash"],"articleSection":[],"inLanguage":"en","author":{"@type":"Person","name":"Manuel Holtgrewe"},"potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://fullstackbio.de/posts/2022/2022-12-24-robust-column-extraction/#comments"]}]}]}</script><link type=text/css rel=stylesheet href=/css/print.css media=print><link type=text/css rel=stylesheet href=/css/poole.css><link type=text/css rel=stylesheet href=/css/hyde.css><style type=text/css>.sidebar{background-color:#878b94}.read-more-link a{border-color:#878b94}.read-more-link a:hover{background-color:#878b94}.pagination li a{color:#878b94;border:1px solid #878b94}.pagination li.active a{background-color:#878b94}.pagination li a:hover{background-color:#878b94;opacity:.75}footer a,.content a,.related-posts li a:hover{color:#878b94}</style><link type=text/css rel=stylesheet href=/css/custom.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous></head><body><aside class=sidebar><div class=container><div class=sidebar-about><div class=author-image><a href=https://fullstackbio.de/><img src=/images/profile.jpg class="img-circle img-headshot center" alt="Profile Picture"></a></div><h1>Full Stack Bioinformatics</h1><p class=lead>From transistors to biomedical insight</p></div><nav><ul class=sidebar-nav><li><a href=https://fullstackbio.de/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/posts/>Posts</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li></ul></nav><section class=social-icons><a href=https://www.linkedin.com/in/manuel-holtgrewe/ rel=me title=Linkedin target=_blank><i class="fab fa-linkedin" aria-hidden=true></i></a>
+<a href=https://github.com/holtgrewe rel=me title=GitHub target=_blank><i class="fab fa-github" aria-hidden=true></i></a></section></div></aside><main class="content container"><div class=post><h1 class=title>Unix Sleight of Hand (2/?): Robust Column Extraction</h1><div class=post-date><time datetime=2022-12-24T00:00:00Z>Dec 24, 2022</time> <span class=readtime>&#183; 5 min read</span></div><div><p>Many Bioinformaticians spend a lot of their time handling text files.
+Linux (and other Unixes) excel at processing text files and offer many tools for handling it.
+However, etracting a particular column from text files is surprisingly hard.
+This blog post explores some robust solutions.</p><figure><img src=/posts/2022/2022-12-24-fishermen.jpg alt="&amp;rsquo;etching of three fisherman with a fishing rod&amp;rsquo; according to [Stable Diffusion]." width=50%><figcaption><p>&rsquo;etching of three fisherman with a fishing rod&rsquo; according to [<a href=https://huggingface.co/spaces/stabilityai/stable-diffusion>Stable Diffusion</a>].</p></figcaption></figure><h2 id=well-formatted-data-cut>Well-formatted data? <code>cut</code>!</h2><p>In the case that you have well-formed data, <code>cut</code> is probably your best friend.
+By default, <code>cut</code> assumes that you want to use the tabulator character for text separation.</p><p>Let us prepare a clean TSV file first.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;col1\tcol2\tcol3&#34;</span> &gt; test.tsv
+</span></span><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;a1\ta2\ta3&#34;</span> &gt;&gt; test.tsv
+</span></span><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;b1\tb2\tb3&#34;</span> &gt;&gt; test.tsv
+</span></span><span style=display:flex><span>$ cat test.tsv
+</span></span><span style=display:flex><span>col1    col2    col3
+</span></span><span style=display:flex><span>a1      a2      a3
+</span></span><span style=display:flex><span>b1      b2      b3
+</span></span></code></pre></div><p>What do these commands to?
+The <code>-e</code> flag enables escape characters, that is <code>\t</code> will be translated to a tabulator.
+With <code>> test.tsv</code> we create the file <code>test.tsv</code> and overwrite the file if it already exists.
+With <code>>> test.tsv</code> we append a new line to the file.
+The <code>cat shows</code> us the file contents.
+Wonderful.</p><p>Let us take a test drive.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ cut -f <span style=color:#40a070>1</span> test.tsv
+</span></span><span style=display:flex><span>col1
+</span></span><span style=display:flex><span>a1
+</span></span><span style=display:flex><span>b1
+</span></span><span style=display:flex><span>$ cut -f 1,2 test.tsv
+</span></span><span style=display:flex><span>col1    col2
+</span></span><span style=display:flex><span>a1      a2
+</span></span><span style=display:flex><span>b1      b2
+</span></span></code></pre></div><p>Neat, we can also print more than one column.
+However, the following might disappoint you.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ cut -f 2,1 test.tsv
+</span></span><span style=display:flex><span>col1    col2
+</span></span><span style=display:flex><span>a1      a2
+</span></span><span style=display:flex><span>b1      b2
+</span></span></code></pre></div><p>We cannot change the order of columns.
+More on this later.</p><p>Note that we can also change the delimiter.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ head -n <span style=color:#40a070>3</span> /etc/passwd | cut -d : -f 1,2
+</span></span><span style=display:flex><span>root:x
+</span></span><span style=display:flex><span>daemon:x
+</span></span><span style=display:flex><span>bin:x
+</span></span></code></pre></div><p>Neat.
+You can also cut out certain bytes.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ head -n <span style=color:#40a070>3</span> /etc/passwd | cut -b 2-4
+</span></span><span style=display:flex><span>oot
+</span></span><span style=display:flex><span>aem
+</span></span><span style=display:flex><span>in:
+</span></span></code></pre></div><h2 id=interlude-turn-it-around>Interlude: Turn It Around</h2><p>What if you are interested in the last bytes of each line?
+Did you know about <code>rev</code>?</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ head -n <span style=color:#40a070>3</span> /etc/passwd
+</span></span><span style=display:flex><span>root:x:0:0:root:/root:/bin/bash
+</span></span><span style=display:flex><span>daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+</span></span><span style=display:flex><span>bin:x:2:2:bin:/bin:/usr/sbin/nologin
+</span></span><span style=display:flex><span>$ head -n <span style=color:#40a070>3</span> /etc/passwd | rev
+</span></span><span style=display:flex><span>hsab/nib/:toor/:toor:0:0:x:toor
+</span></span><span style=display:flex><span>nigolon/nibs/rsu/:nibs/rsu/:nomead:1:1:x:nomead
+</span></span><span style=display:flex><span>nigolon/nibs/rsu/:nib/:nib:2:2:x:nib
+</span></span></code></pre></div><p>Let that sink in a bit.
+You can reverse each line to extract the n-th field or byte of each line.
+I find this really neat.</p><p>By the way, did you now about <code>tac</code>?
+<code>tac</code> is the opposite of <code>cat</code> and allows you to print a text file line by line, starting with the last one and ending with the first one.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ tac /etc/passwd | head -n <span style=color:#40a070>3</span>
+</span></span><span style=display:flex><span>rtkit:x:114:123:RealtimeKit,,,:/proc:/usr/sbin/nologin
+</span></span><span style=display:flex><span>redis:x:113:122::/var/lib/redis:/usr/sbin/nologin
+</span></span><span style=display:flex><span>postgres:x:112:121:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+</span></span></code></pre></div><figure><img src=/posts/2022/2022-12-24-laughing-cat.png alt="&amp;lsquo;a cat laughing madly as an etching&amp;rsquo; according to [Dalle-E 2]." width=50%><figcaption><p>&lsquo;a cat laughing madly as an etching&rsquo; according to [<a href=https://labs.openai.com>Dalle-E 2</a>].</p></figcaption></figure><h2 id=awk----a-text-wranglers-best-friend><code>awk</code> &ndash; a Text Wrangler&rsquo;s Best Friend</h2><p>Of course, you could write a little program that does the column extraction.
+For example, you can pass a commands links to the Python interpreter like this:
+<code>python -c "print('Hello'); print('World')"</code>.
+However, why not try a programming language that is focused at string processing.
+Modern Linux distributions ship with a couple of them preinstalled: sed, grep, awk, perl.</p><p>You will most likely know <code>grep</code> which allows you to find lines matching a certain pattern (not of use here).
+Sed is the <strong>s</strong>tream <strong>ed</strong>itor and provides a very terse (you could say hard to read) language for manipulating lines either interpreted as fields or based on regular expressions.
+With sed, we would probably express the extraction of a column by deleting all others or all text before and after the column.
+This sounds not so helpful for our task.
+Most people will know perl which is of course up to the task but quite bulky for such a simple task.</p><figure><img src=/posts/2022/2022-12-24-lion.jpg alt="&amp;lsquo;a lion tamer having a lion jump through a burning hoop as an etching&amp;rsquo; according to [Stable Diffusion]." width=50%><figcaption><p>&lsquo;a lion tamer having a lion jump through a burning hoop as an etching&rsquo; according to [<a href=https://huggingface.co/spaces/stabilityai/stable-diffusion>Stable Diffusion</a>].</p></figcaption></figure><p>Let us thus look how to handle this in awk:</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ awk <span style=color:#4070a0>&#39;{print $1}&#39;</span> test.tsv
+</span></span><span style=display:flex><span>col1
+</span></span><span style=display:flex><span>a1
+</span></span><span style=display:flex><span>b1
+</span></span></code></pre></div><p>What does this do?
+Awk applies the program <code>{print $1}</code> to the file <code>test.tsv</code>.
+The program executes the block between the curly braces to each line of the input and &mldr; prints the first field.
+By default, <code>awk</code> will split the input at each whitespace.
+The neat part of this is that awk will not interpret whitespace at the beginning of each line as a separator by default.
+Thus, the result would be the same for the following file.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>   col1    col2    col3
+</span></span><span style=display:flex><span>  a1      a2      a3
+</span></span><span style=display:flex><span>b1      b2      b3
+</span></span></code></pre></div><p>Note that <code>awk</code> is quite flexible.
+So, to use the tabulator character as the field separator, you can pass <code>-F $'\t'</code> (on Bash shells for interpreting the <code>$</code> dollar sign).</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ awk -F <span style=color:#4070a0>$&#39;\t&#39;</span> <span style=color:#4070a0>&#39;{print $1}&#39;</span> test.tsv
+</span></span><span style=display:flex><span>col1
+</span></span><span style=display:flex><span>a1
+</span></span><span style=display:flex><span>b1
+</span></span></code></pre></div><p>The result is the same for our file.
+Consider the following example:</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;col1\tcol2\tcol3&#34;</span> &gt; test.tsv
+</span></span><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;a 1\ta2\ta3&#34;</span> &gt;&gt; test.tsv
+</span></span><span style=display:flex><span>$ <span style=color:#007020>echo</span> -e <span style=color:#4070a0>&#34;b 1\tb2\tb3&#34;</span> &gt;&gt; test.tsv
+</span></span><span style=display:flex><span>$ cat test.tsv
+</span></span><span style=display:flex><span>col1    col2    col3
+</span></span><span style=display:flex><span>a <span style=color:#40a070>1</span>     a2      a3
+</span></span><span style=display:flex><span>b <span style=color:#40a070>1</span>     b2      b3
+</span></span><span style=display:flex><span>$ awk -F <span style=color:#4070a0>$&#39;\t&#39;</span> <span style=color:#4070a0>&#39;{print $1}&#39;</span> test.tsv
+</span></span><span style=display:flex><span>col1
+</span></span><span style=display:flex><span>a <span style=color:#40a070>1</span>
+</span></span><span style=display:flex><span>b <span style=color:#40a070>1</span>
+</span></span></code></pre></div><p>We can also print more than one field:</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ awk -F <span style=color:#4070a0>$&#39;\t&#39;</span> <span style=color:#4070a0>&#39;{print $1, $2}&#39;</span> test.tsv
+</span></span><span style=display:flex><span>col1 col2
+</span></span><span style=display:flex><span>a <span style=color:#40a070>1</span> a2
+</span></span><span style=display:flex><span>b <span style=color:#40a070>1</span> b2
+</span></span></code></pre></div><p>Hm, a bit disappointing, right?
+Awk uses a single whitespace for the output field separator.
+We can fix this by adding a <code>BEGIN</code> block that sets the output field separator <code>OFS</code> to the input field separator <code>FS</code>.</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ awk -F <span style=color:#4070a0>$&#39;\t&#39;</span> <span style=color:#4070a0>&#39;BEGIN {OFS=FS} {print $1, $2}&#39;</span> test.tsv
+</span></span><span style=display:flex><span>col1    col2
+</span></span><span style=display:flex><span>a <span style=color:#40a070>1</span>     a2
+</span></span><span style=display:flex><span>b <span style=color:#40a070>1</span>     b2
+</span></span></code></pre></div><p>Oh, and you can do much more with awk.
+For example, <a href=https://en.wikipedia.org/wiki/Jon_Bentley_(computer_scientist)>Jon Bentley&rsquo;s</a> <em>Programming Pearls</em> features a lot of interesting awk programs as does the <a href=https://www.gnu.org/software/gawk/manual/gawk.html>GNU Awk User&rsquo;s Guide</a>.
+If you are wrangling text, you might find the following examples interesting:</p><div class=highlight><pre tabindex=0 style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-awk data-lang=awk><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># run block for lines with field 1 not matching regex</span>
+</span></span><span style=display:flex><span>(<span style=color:#666>$</span><span style=color:#40a070>1</span> <span style=color:#666>!~</span> <span style=color:#235388>/^col/</span>) { ... }
+</span></span><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># the same for the whole line (stored in $0)</span>
+</span></span><span style=display:flex><span>(<span style=color:#666>$</span><span style=color:#40a070>0</span> <span style=color:#666>!~</span> <span style=color:#235388>/^col/</span>) { ... }
+</span></span><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># starting from line 2 (NR is the row number)</span>
+</span></span><span style=display:flex><span>(<span style=color:#007020>NR</span> <span style=color:#666>&gt;</span> <span style=color:#40a070>1</span>) { ... }
+</span></span><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># filter based on field count stored in NF</span>
+</span></span><span style=display:flex><span>(<span style=color:#007020>NF</span> <span style=color:#666>&gt;</span> <span style=color:#40a070>42</span>) { ... }
+</span></span><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># use $ to look at the **value** of the last field</span>
+</span></span><span style=display:flex><span>(<span style=color:#666>$</span><span style=color:#007020>NF</span> <span style=color:#666>&gt;</span> <span style=color:#40a070>1</span>) { ... }
+</span></span><span style=display:flex><span><span style=color:#60a0b0;font-style:italic># run before the first and after the last line</span>
+</span></span><span style=display:flex><span><span style=color:#007020>BEGIN</span> { ... }
+</span></span><span style=display:flex><span><span style=color:#007020>END</span> { ... }
+</span></span></code></pre></div><p>Let me close with a bonus tip.
+Famous Heng Li of BWA (and other) fame has written a <a href=https://github.com/lh3/bioawk>bioawk</a> that attempts to bring the simplicity and power of Awk to bioinformatics file formats.</p></div><div><ul class=tags><li><a href=https://fullstackbio.de/tags/bash/ class=tag-link>bash</a></li></ul></div></div></main><footer><div><p>&copy; Manuel Holtgrewe 2022
+&#183; <a href=https://creativecommons.org/licenses/by-sa/4.0 target=_blank>CC BY-SA 4.0</a></p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script>
+<script src=/js/jquery.min.js></script>
+<script src=/js/soho.js></script></body></html>
