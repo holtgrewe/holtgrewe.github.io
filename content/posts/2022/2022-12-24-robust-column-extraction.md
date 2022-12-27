@@ -13,7 +13,7 @@ images:
 
 Many Bioinformaticians spend a lot of their time handling text files.
 Linux (and other Unixes) excel at processing text files and offer many tools for handling it.
-However, etracting a particular column from text files is surprisingly hard.
+However, extracting a particular column from text files is surprisingly hard.
 This blog post explores some robust solutions.
 
 <!--more-->
