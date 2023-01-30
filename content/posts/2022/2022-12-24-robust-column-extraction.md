@@ -7,8 +7,6 @@ tags:
   - bash
   - sleight of hand
 author: Manuel Holtgrewe
-images:
-  - /posts/2022/2022-11-28-fishermen.jpg
 ---
 
 Many Bioinformaticians spend a lot of their time handling text files.
